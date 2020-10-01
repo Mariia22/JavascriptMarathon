@@ -22,6 +22,7 @@ body{
 }
 
 .panel{
+    display: block;
     width: 33%;
 }
 
@@ -50,7 +51,10 @@ p{
     text-align: center;
 }
 p:hover{
-    color: red;
-    font-size: 48px; 
     cursor: pointer;
+    font-size: 46px;
+}
+span{
+    color: #f2ead0;
+    font-size: 16px;
 }
