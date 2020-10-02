@@ -17,3 +17,9 @@ const lazyLoad = target => {
 };
 
 targets.forEach(lazyLoad);
+ 
+targets.forEach(target.addEventListener("click", increaseElem));
+
+function increaseElem() {
+    img.style.scale(1.2);
+}
