@@ -13,27 +13,39 @@
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.strokeStyle = 'red';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
+    ctx.strokeStyle = 'green';
 
     let lineX = 0;
     let lineY = 0;
+    let color = 0;
     let isDrawing = false;
+    ctx.lineWidth = 50;
+
+
 
 
     function draw(e) {
-      //if (!isDrawing) return;
+      console.log(color);
+      if (!isDrawing) return;
       ctx.beginPath();
+      ctx.strokeStyle = `hsl(${color}, 100%, 50%)`;
       ctx.moveTo(lineX, lineY);
-      console.log(lineX);
       ctx.lineTo(e.offsetX, e.offsetY);
-      console.log(e.offsetX);
       ctx.stroke();
+      [lineX, lineY] = [e.offsetX, e.offsetY];
+      color++;
+      if (color >= 360) {
+        color = 0;
+      }
     }
 
     canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      [lineX, lineY] = [e.offsetX, e.offsetY];
+    });
     canvas.addEventListener('mouseup', () => isDrawing = false);
     canvas.addEventListener('mouseout', () => isDrawing = false);
   </script>
