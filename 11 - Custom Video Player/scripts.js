@@ -4,6 +4,7 @@ const skip = document.querySelectorAll('[data-skip]');
 const range = document.querySelectorAll('.player__slider');
 const progressFilled = document.querySelector('.progress__filled');
 const progress = document.querySelector('.progress');
+const fullscreen = document.querySelector('.size');
 
 function toggleVideo() {
     let method = video.paused ? 'play' : 'pause';
@@ -34,6 +35,10 @@ function handleVideo(e) {
     video.currentTime = handleTime;
 }
 
+function changeSize() {
+    video.requestFullscreen();
+}
+
 skip.forEach(buttonSkip => buttonSkip.addEventListener('click', skipVideo));
 range.forEach(buttonRange => buttonRange.addEventListener('mousemove', handleRange));
 
@@ -46,3 +51,4 @@ let mousedown = false;
 progress.addEventListener('mousemove', (e) => mousedown && handleVideo(e));
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
+fullscreen.addEventListener('click', changeSize);
