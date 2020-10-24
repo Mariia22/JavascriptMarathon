@@ -11,9 +11,12 @@
   <script>
     const key = 'wesbos';
     const pressed = [];
-    document.addEventListener('keyup', (e) => {
-      pressed.push(e);
-      console.log(pressed);
+    window.addEventListener('keyup', (e) => {
+      pressed.push(e.key);
+      pressed.splice(-key.length - 1, pressed.length - key.length);
+      if (pressed.join('').includes(key)) {
+        console.log('DING');
+      }
     });
   </script>
 </body>
