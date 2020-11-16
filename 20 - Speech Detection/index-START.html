@@ -12,12 +12,33 @@
   </div>
 
   <script>
+    const work = document.querySelector('.words');
+    let p = document.createElement('p');
+    work.appendChild(p);
+
+
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.interimResults = true;
     recognition.lang = 'ru-Ru';
     recognition.addEventListener('result', e => {
       console.log(e.results);
+      const transcription = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+
+      console.log(transcription);
+      p.textContent = transcription;
+      if (e.results[0].isFinal) {
+        p = document.createElement('p');
+        work.appendChild(p);
+      }
+      if (transcription.includes('раз')) {
+        p = document.createElement('p');
+        p.textContent = ':))))';
+        work.appendChild(p);
+      }
     });
 
     recognition.addEventListener('end', recognition.start);
