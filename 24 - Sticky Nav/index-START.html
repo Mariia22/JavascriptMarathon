@@ -175,9 +175,14 @@
     const nav = document.querySelector('#main');
     const scroll = nav.offsetTop;
 
-    function fixNav(){
-      if (scroll < window.scrollY){
-        nav.classList.add();
+    function fixNav() {
+      if (scroll < window.scrollY) {
+        nav.classList.add('nav-fixed');
+        document.body.style.paddingTop = nav.offsetHeight + 'px';
+      }
+      else {
+        nav.classList.remove('nav-fixed');
+        document.body.style.paddingTop = 0;
       }
 
     }
