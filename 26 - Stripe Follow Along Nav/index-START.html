@@ -233,15 +233,34 @@
   </style>
 
   <script>
-    const nav = document.querySelector('.nav');
+    const nav = document.querySelector('nav');
     const list = document.querySelectorAll('.cool > li');
-    const dropdownBackground = document.querySelector('.dropdrownBackground');
+    const dropdownBackground = document.querySelector('.dropdownBackground');
 
     function handleEnter() {
-      console.log("I'm here");
+      this.classList.add('trigger-enter');
+      setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+      const dropdown = this.querySelector('.dropdown');
+      const rectDropdown = dropdown.getBoundingClientRect();
+      const rectNav = nav.getBoundingClientRect();
+
+      const coords = {
+        width: rectDropdown.width,
+        height: rectDropdown.height,
+        top: rectDropdown.top - rectNav.top,
+        left: rectDropdown.left - rectNav.left
+      };
+
+      dropdownBackground.style.setProperty('width', `${coords.width}px`);
+      dropdownBackground.style.setProperty('height', `${coords.height}px`);
+      dropdownBackground.style.setProperty('transform', `translate(${coords.left}px,${coords.top}px)`);
+      dropdownBackground.classList.add('open');
     }
+
     function handleLeave() {
-      console.log("Leave");
+      this.classList.remove('trigger-enter');
+      this.classList.remove('trigger-enter-active');
+      dropdownBackground.classList.remove('open');
     }
 
     list.forEach(item => item.addEventListener('mouseenter', handleEnter));
